@@ -6,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 import { login } from "@/entities/user/api";
 import { useAuthStore } from "@/store/auth-store";
 
@@ -79,6 +78,7 @@ export function LoginForm() {
               autoComplete="email"
               placeholder="you@example.com"
             />
+
             {errors.email && (
               <p className="mt-1.5 text-sm text-red-600">{errors.email.message}</p>
             )}
@@ -97,7 +97,9 @@ export function LoginForm() {
               type="password"
               autoComplete="current-password"
               {...register("password")}
+              placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
             />
+
             {errors.password && (
               <p className="mt-1.5 text-sm text-red-600">{errors.password.message}</p>
             )}
