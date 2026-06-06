@@ -1,14 +1,17 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import { getTasks } from "@/entities/task/api";
+import { deleteTask, getTasks } from "@/entities/task/api";
+import { TaskStatusSelect } from "@/features/task/TaskStatusSelect";
 
 type TaskListProps = {
   projectId: string;
 };
 
 export function TaskList({ projectId }: TaskListProps) {
+  const queryClient = useQueryClient();
+
   const {
     data: tasks,
     isError,
@@ -17,6 +20,13 @@ export function TaskList({ projectId }: TaskListProps) {
     queryKey: ["projects", projectId, "tasks"],
     queryFn: () => getTasks(projectId),
     enabled: Boolean(projectId),
+  });
+
+  const deleteTaskMutation = useMutation({
+    mutationFn: deleteTask,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["projects", projectId, "tasks"] });
+    },
   });
 
   return (
@@ -57,13 +67,25 @@ export function TaskList({ projectId }: TaskListProps) {
                   )}
                 </div>
 
-                <div className="flex gap-2 text-xs font-medium">
-                  <span className="rounded-full bg-slate-100 px-2.5 py-1 text-slate-700">
-                    {task.status}
-                  </span>
+                <div className="flex flex-wrap items-center gap-2">
+                  <TaskStatusSelect
+                    projectId={projectId}
+                    status={task.status}
+                    taskId={task.id}
+                  />
+
                   <span className="rounded-full bg-slate-100 px-2.5 py-1 text-slate-700">
                     {task.priority}
                   </span>
+
+                  <button
+                    className="rounded-md bg-red-600 px-3 py-2 text-sm font-medium text-white transition hover:bg-red-700 focus:ring-2 focus:ring-red-300 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-70"
+                    disabled={deleteTaskMutation.isPending}
+                    onClick={() => deleteTaskMutation.mutate(task.id)}
+                    type="button"
+                  >
+                    {deleteTaskMutation.isPending ? "Deleting..." : "Delete"}
+                  </button>
                 </div>
               </div>
             </article>
