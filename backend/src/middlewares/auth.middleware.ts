@@ -2,6 +2,10 @@ import { NextFunction, Request, Response } from "express";
 import { verifyToken } from "@/lib/jwt.js";
 import { AppError } from "./error.middleware.js";
 
+export interface AuthenticatedRequest extends Request {
+  userId: string;
+}
+
 export function authMiddleware(
   req: Request,
   res: Response,
@@ -22,7 +26,7 @@ export function authMiddleware(
   try {
     const payload = verifyToken(token);
 
-    (req as Request & { userId: string }).userId = payload.userId;
+    (req as AuthenticatedRequest).userId = payload.userId;
 
     next();
   } catch {

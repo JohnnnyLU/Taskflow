@@ -1,9 +1,6 @@
 import { NextFunction, Request, Response } from "express";
+import { AuthenticatedRequest } from "@/middlewares/auth.middleware.js";
 import * as authService from "./auth.service.js";
-
-export interface AuthenticatedRequest extends Request {
-  userId: string;
-}
 
 export async function registerController(
   req: Request,
