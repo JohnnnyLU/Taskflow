@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { AuthenticatedRequest } from "@/middlewares/auth.middleware.js";
+import { AppError } from "@/middlewares/error.middleware.js";
 import * as projectsService from "./projects.service.js";
 
 export async function getProjectsController(
@@ -14,7 +15,7 @@ export async function getProjectsController(
 
     return res.status(200).json(projects);
   } catch (error) {
-    next(error);
+    return next(error);
   }
 }
 
@@ -30,7 +31,7 @@ export async function createProjectController(
 
     return res.status(201).json(project);
   } catch (error) {
-    next(error);
+    return next(error);
   }
 }
 
@@ -43,11 +44,15 @@ export async function getProjectController(
     const { userId } = req as AuthenticatedRequest;
     const { projectId } = req.params;
 
+    if (typeof projectId !== "string") {
+      return next(new AppError("Project not found", 404));
+    }
+
     const project = await projectsService.getProject(userId, projectId);
 
     return res.status(200).json(project);
   } catch (error) {
-    next(error);
+    return next(error);
   }
 }
 
@@ -60,10 +65,14 @@ export async function deleteProjectController(
     const { userId } = req as AuthenticatedRequest;
     const { projectId } = req.params;
 
+    if (typeof projectId !== "string") {
+      return next(new AppError("Project not found", 404));
+    }
+
     await projectsService.deleteProject(userId, projectId);
 
     return res.status(204).send();
   } catch (error) {
-    next(error);
+    return next(error);
   }
 }
