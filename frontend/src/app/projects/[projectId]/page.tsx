@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { getProject } from "@/entities/project/api";
 import { ProtectedRoute } from "@/features/auth/ProtectedRoute";
+import { CreateTaskForm } from "@/features/task/CreateTaskForm";
 import { Header } from "@/widgets/Header";
 import { TaskList } from "@/widgets/TaskList";
 
@@ -56,6 +57,7 @@ export default function ProjectPage() {
                 )}
               </section>
 
+              <CreateTaskForm projectId={projectId} />
               <TaskList projectId={projectId} />
             </div>
           )}
