@@ -11,9 +11,9 @@ export class AppError extends Error {
 
 export function errorMiddleware(
   error: Error,
-  request: Request,
+  _request: Request,
   response: Response,
-  next: NextFunction
+  _next: NextFunction
 ) {
   if (error instanceof AppError) {
     return response.status(error.statusCode).json({

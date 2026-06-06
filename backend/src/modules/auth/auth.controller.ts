@@ -12,7 +12,7 @@ export async function registerController(
 
     return res.status(201).json(result);
   } catch (error) {
-    next(error);
+    return next(error);
   }
 }
 
@@ -26,7 +26,7 @@ export async function loginController(
 
     return res.status(200).json(result);
   } catch (error) {
-    next(error);
+    return next(error);
   }
 }
 
@@ -42,6 +42,6 @@ export async function meController(
 
     return res.status(200).json(user);
   } catch (error) {
-    next(error);
+    return next(error);
   }
 }

@@ -8,7 +8,7 @@ export interface AuthenticatedRequest extends Request {
 
 export function authMiddleware(
   req: Request,
-  res: Response,
+  _res: Response,
   next: NextFunction
 ) {
   const authHeader = req.headers.authorization;
