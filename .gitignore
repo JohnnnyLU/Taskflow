@@ -59,3 +59,5 @@ Thumbs.db
 # AI
 .codex/
 .agents/
+.ai/
+.playwright-mcp/
