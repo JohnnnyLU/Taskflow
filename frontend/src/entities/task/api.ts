@@ -9,7 +9,7 @@ export async function getTasks(projectId: string): Promise<Task[]> {
 
 export async function createTask(
   projectId: string,
-  input: CreateTaskInput
+  input: CreateTaskInput,
 ): Promise<Task> {
   const response = await api.post<Task>(`/projects/${projectId}/tasks`, input);
 
@@ -18,7 +18,7 @@ export async function createTask(
 
 export async function updateTaskStatus(
   taskId: string,
-  input: UpdateTaskStatusInput
+  input: UpdateTaskStatusInput,
 ): Promise<Task> {
   const response = await api.patch<Task>(`/tasks/${taskId}/status`, input);
 

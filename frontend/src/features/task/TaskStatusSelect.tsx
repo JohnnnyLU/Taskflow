@@ -13,11 +13,7 @@ type TaskStatusSelectProps = {
   status: TaskStatus;
 };
 
-export function TaskStatusSelect({
-  projectId,
-  taskId,
-  status,
-}: TaskStatusSelectProps) {
+export function TaskStatusSelect({ projectId, taskId, status }: TaskStatusSelectProps) {
   const queryClient = useQueryClient();
 
   const updateStatusMutation = useMutation({
