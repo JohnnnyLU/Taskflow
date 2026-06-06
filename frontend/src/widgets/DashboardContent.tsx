@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 
 import { getMe } from "@/entities/user/api";
-import { Header } from "@/widgets/header";
+import { Header } from "@/widgets/Header";
 
 export function DashboardContent() {
   const { data: user, isLoading } = useQuery({

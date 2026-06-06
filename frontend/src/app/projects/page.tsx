@@ -1,6 +1,6 @@
 import { CreateProjectForm } from "@/features/project/CreateProjectForm";
 import { ProtectedRoute } from "@/features/auth/ProtectedRoute";
-import { Header } from "@/widgets/header";
+import { Header } from "@/widgets/Header";
 import { ProjectList } from "@/widgets/ProjectList";
 
 export default function ProjectsPage() {
