@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 
+import { getProjects } from "@/entities/project/api";
 import { getMe } from "@/entities/user/api";
 import { Header } from "@/widgets/Header";
 
@@ -10,6 +11,14 @@ export function DashboardContent() {
   const { data: user, isLoading } = useQuery({
     queryKey: ["auth", "me"],
     queryFn: getMe,
+  });
+  const {
+    data: projects,
+    isError: isProjectsError,
+    isLoading: isProjectsLoading,
+  } = useQuery({
+    queryKey: ["projects"],
+    queryFn: getProjects,
   });
 
   if (isLoading) {
@@ -38,7 +47,14 @@ export function DashboardContent() {
           <h1 className="text-2xl font-semibold tracking-tight text-slate-950">
             Hello, {user.name}
           </h1>
-          <p className="mt-2 text-slate-600">Projects: 0</p>
+          <p className="mt-2 text-slate-600">
+            Projects:{" "}
+            {isProjectsLoading
+              ? "Loading..."
+              : isProjectsError
+                ? "Could not load"
+                : (projects?.length ?? 0)}
+          </p>
 
           <Link
             className="mt-5 inline-flex h-10 items-center rounded-md bg-slate-950 px-4 text-sm font-medium text-white transition hover:bg-slate-800 focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:outline-none"

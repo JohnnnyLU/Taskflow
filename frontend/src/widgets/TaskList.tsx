@@ -4,6 +4,9 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { deleteTask, getTasks } from "@/entities/task/api";
 import { TaskStatusSelect } from "@/features/task/TaskStatusSelect";
+import { type TaskStatusFilter, useTaskFiltersStore } from "@/store/task-filters-store";
+
+const taskStatusFilters: TaskStatusFilter[] = ["all", "todo", "in_progress", "done"];
 
 type TaskListProps = {
   projectId: string;
@@ -11,6 +14,8 @@ type TaskListProps = {
 
 export function TaskList({ projectId }: TaskListProps) {
   const queryClient = useQueryClient();
+  const statusFilter = useTaskFiltersStore((state) => state.status);
+  const setStatusFilter = useTaskFiltersStore((state) => state.setStatus);
 
   const {
     data: tasks,
@@ -29,9 +34,31 @@ export function TaskList({ projectId }: TaskListProps) {
     },
   });
 
+  const filteredTasks =
+    statusFilter === "all"
+      ? tasks
+      : tasks?.filter((task) => task.status === statusFilter);
+
   return (
     <section>
-      <h2 className="text-xl font-semibold tracking-tight text-slate-950">Tasks</h2>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h2 className="text-xl font-semibold tracking-tight text-slate-950">Tasks</h2>
+
+        <label className="flex items-center gap-2 text-sm font-medium text-slate-700">
+          Status
+          <select
+            className="h-9 rounded-md border border-slate-300 bg-white px-2 text-sm text-slate-950 transition outline-none focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+            onChange={(event) => setStatusFilter(event.target.value as TaskStatusFilter)}
+            value={statusFilter}
+          >
+            {taskStatusFilters.map((status) => (
+              <option key={status} value={status}>
+                {status}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
 
       {isLoading && (
         <div className="mt-4 rounded-md border border-slate-200 bg-white p-4 text-sm text-slate-600 shadow-sm">
@@ -51,9 +78,19 @@ export function TaskList({ projectId }: TaskListProps) {
         </div>
       )}
 
-      {!isLoading && !isError && tasks && tasks.length > 0 && (
+      {!isLoading &&
+        !isError &&
+        tasks &&
+        tasks.length > 0 &&
+        filteredTasks?.length === 0 && (
+          <div className="mt-4 rounded-md border border-slate-200 bg-white p-4 text-sm text-slate-600 shadow-sm">
+            No tasks match selected status.
+          </div>
+        )}
+
+      {!isLoading && !isError && filteredTasks && filteredTasks.length > 0 && (
         <div className="mt-4 space-y-3">
-          {tasks.map((task) => (
+          {filteredTasks.map((task) => (
             <article
               className="rounded-md border border-slate-200 bg-white p-4 shadow-sm"
               key={task.id}
