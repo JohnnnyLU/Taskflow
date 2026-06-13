@@ -9,6 +9,11 @@ vi.mock("next/navigation", () => ({
   }),
 }));
 
+vi.mock("@/entities/user/api", () => ({
+  login: vi.fn(),
+}));
+
+import { login } from "@/entities/user/api";
 import { LoginForm } from "./LoginForm";
 
 function renderLoginForm() {
@@ -35,5 +40,22 @@ describe("LoginForm", () => {
 
     // Assert
     expect(await screen.findByText(/invalid email/i)).toBeInTheDocument();
+  });
+
+  it("shows root error when login fails", async () => {
+    // Arrange
+    vi.mocked(login).mockRejectedValue(new Error("Invalid credentials"));
+
+    renderLoginForm();
+
+    const user = userEvent.setup({ document });
+
+    // Act
+    await user.type(screen.getByLabelText(/email/i), "john@example.com");
+    await user.type(screen.getByLabelText(/password/i), "validpassword");
+    await user.click(screen.getByRole("button", { name: /sign in/i }));
+
+    // Assert
+    expect(await screen.findByText(/invalid email or password/i)).toBeInTheDocument();
   });
 });
