@@ -4,6 +4,26 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { useAuthStore } from "@/store/auth-store";
 import { api } from "./axios-instance";
 
+function mockSuccessfulRequest() {
+  let requestConfig: InternalAxiosRequestConfig | undefined;
+
+  api.defaults.adapter = async (config) => {
+    requestConfig = config;
+
+    return {
+      data: {},
+      status: 200,
+      statusText: "OK",
+      headers: {},
+      config,
+    };
+  };
+
+  return {
+    getRequestConfig: () => requestConfig,
+  };
+}
+
 describe("api axios instance", () => {
   let originalAdapter: typeof api.defaults.adapter;
 
@@ -24,50 +44,28 @@ describe("api axios instance", () => {
     // Arrange
     useAuthStore.getState().setAccessToken("test-access-token");
 
-    let requestConfig: InternalAxiosRequestConfig | undefined;
-
-    api.defaults.adapter = async (config) => {
-      requestConfig = config;
-
-      return {
-        data: {},
-        status: 200,
-        statusText: "OK",
-        headers: {},
-        config,
-      };
-    };
+    const request = mockSuccessfulRequest();
 
     // Act
     await api.get("/test");
 
     // Assert
-    expect(requestConfig).toBeDefined();
-    expect(requestConfig?.headers?.Authorization).toBe("Bearer test-access-token");
+    expect(request.getRequestConfig()).toBeDefined();
+    expect(request.getRequestConfig()?.headers?.Authorization).toBe(
+      "Bearer test-access-token",
+    );
   });
 
   it("does not add Authorization header when access token is missing", async () => {
     // Arrange
-    let requestConfig: InternalAxiosRequestConfig | undefined;
-
-    api.defaults.adapter = async (config) => {
-      requestConfig = config;
-
-      return {
-        data: {},
-        status: 200,
-        statusText: "OK",
-        headers: {},
-        config,
-      };
-    };
+    const request = mockSuccessfulRequest();
 
     // Act
     await api.get("/test");
 
     // Assert
-    expect(requestConfig).toBeDefined();
-    expect(requestConfig?.headers?.Authorization).toBeUndefined();
+    expect(request.getRequestConfig()).toBeDefined();
+    expect(request.getRequestConfig()?.headers?.Authorization).toBeUndefined();
   });
 
   it("logs out when response status is 401", async () => {
