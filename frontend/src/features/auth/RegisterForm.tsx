@@ -57,6 +57,7 @@ export function RegisterForm() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4 py-10">
       <form
+        noValidate
         className="w-full max-w-md rounded-md border border-slate-200 bg-white p-6 shadow-sm"
         onSubmit={handleSubmit(onSubmit)}
       >
