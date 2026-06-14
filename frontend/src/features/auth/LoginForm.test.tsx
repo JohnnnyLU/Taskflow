@@ -1,8 +1,11 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { render, screen, waitFor } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
+import { login } from "@/entities/user/api";
+import { useAuthStore } from "@/store/auth-store";
+import { renderWithQueryClient } from "@/test/render-with-query-client";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+
 const routerMock = vi.hoisted(() => ({
   replace: vi.fn(),
 }));
@@ -15,18 +18,10 @@ vi.mock("@/entities/user/api", () => ({
   login: vi.fn(),
 }));
 
-import { login } from "@/entities/user/api";
 import { LoginForm } from "./LoginForm";
-import { useAuthStore } from "@/store/auth-store";
 
 function renderLoginForm() {
-  const queryClient = new QueryClient();
-
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <LoginForm />
-    </QueryClientProvider>,
-  );
+  return renderWithQueryClient(<LoginForm />);
 }
 
 describe("LoginForm", () => {

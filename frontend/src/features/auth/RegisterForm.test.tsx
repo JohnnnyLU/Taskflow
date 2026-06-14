@@ -1,8 +1,9 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
+import { renderWithQueryClient } from "@/test/render-with-query-client";
 import { describe, expect, it, vi } from "vitest";
+
 vi.mock("next/navigation", () => ({
   useRouter: () => ({
     replace: vi.fn(),
@@ -12,13 +13,7 @@ vi.mock("next/navigation", () => ({
 import { RegisterForm } from "./RegisterForm";
 
 function renderRegisterForm() {
-  const queryClient = new QueryClient();
-
-  return render(
-    <QueryClientProvider client={queryClient}>
-      <RegisterForm />
-    </QueryClientProvider>,
-  );
+  return renderWithQueryClient(<RegisterForm />);
 }
 
 describe("RegisterForm", () => {
