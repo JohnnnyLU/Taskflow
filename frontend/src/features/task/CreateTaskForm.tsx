@@ -58,7 +58,7 @@ export function CreateTaskForm({ projectId }: CreateTaskFormProps) {
     <section className="rounded-md border border-slate-200 bg-white p-5 shadow-sm">
       <h2 className="text-xl font-semibold tracking-tight text-slate-950">New task</h2>
 
-      <form className="mt-5 space-y-4" onSubmit={handleSubmit(onSubmit)}>
+      <form noValidate className="mt-5 space-y-4" onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label
             className="mb-1.5 block text-sm font-medium text-slate-900"
