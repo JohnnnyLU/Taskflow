@@ -57,11 +57,11 @@ out
 Thumbs.db
 
 # Playwright
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
-/playwright/.auth/
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+playwright/.auth/
 
 # AI
 .codex/
