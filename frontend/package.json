@@ -1,8 +1,8 @@
 {
   "name": "frontend",
   "version": "0.1.0",
+  "description": "",
   "private": true,
-  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -19,6 +19,10 @@
     "check": "npm run format:check && npm run lint && npm run typecheck",
     "ci": "npm run check && npm run test:run && npm run build"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
     "@tanstack/react-query": "^5.101.0",
