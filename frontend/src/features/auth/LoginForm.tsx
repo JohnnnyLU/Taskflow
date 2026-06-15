@@ -6,6 +6,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { login } from "@/entities/user/api";
 import { useAuthStore } from "@/store/auth-store";
 
@@ -15,9 +19,6 @@ const loginSchema = z.object({
 });
 
 type LoginFormValues = z.infer<typeof loginSchema>;
-
-const fieldClassName =
-  "h-10 w-full rounded-md border border-slate-300 bg-white px-3 text-sm text-slate-950 transition outline-none focus:border-slate-500 focus:ring-2 focus:ring-slate-200";
 
 export function LoginForm() {
   const {
@@ -65,14 +66,11 @@ export function LoginForm() {
 
         <div className="space-y-5">
           <div>
-            <label
-              className="mb-1.5 block text-sm font-medium text-slate-900"
-              htmlFor="email"
-            >
+            <Label className="mb-1.5" htmlFor="email">
               Email
-            </label>
-            <input
-              className={fieldClassName}
+            </Label>
+            <Input
+              className="h-10"
               id="email"
               {...register("email")}
               type="email"
@@ -86,14 +84,11 @@ export function LoginForm() {
           </div>
 
           <div>
-            <label
-              className="mb-1.5 block text-sm font-medium text-slate-900"
-              htmlFor="password"
-            >
+            <Label className="mb-1.5" htmlFor="password">
               Password
-            </label>
-            <input
-              className={fieldClassName}
+            </Label>
+            <Input
+              className="h-10"
               id="password"
               type="password"
               autoComplete="current-password"
@@ -113,13 +108,13 @@ export function LoginForm() {
           </p>
         )}
 
-        <button
-          className="mt-4 h-10 w-full rounded-md bg-slate-950 text-sm font-medium text-white transition hover:bg-slate-800 focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-70"
+        <Button
+          className="mt-4 h-10 w-full"
           type="submit"
           disabled={loginMutation.isPending}
         >
           {loginMutation.isPending ? "Signing in..." : "Sign in"}
-        </button>
+        </Button>
 
         <p className="mt-5 text-sm text-slate-600">
           No account?{" "}

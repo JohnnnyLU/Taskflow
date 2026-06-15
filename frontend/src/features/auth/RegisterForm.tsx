@@ -6,6 +6,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { useAuthStore } from "@/store/auth-store";
 import { register as registerUser } from "@/entities/user/api";
 
@@ -20,9 +24,6 @@ const registerSchema = z.object({
 });
 
 type RegisterFormValues = z.infer<typeof registerSchema>;
-
-const fieldClassName =
-  "h-10 w-full rounded-md border border-slate-300 bg-white px-3 text-sm text-slate-950 transition outline-none focus:border-slate-500 focus:ring-2 focus:ring-slate-200";
 
 export function RegisterForm() {
   const {
@@ -72,14 +73,11 @@ export function RegisterForm() {
 
         <div className="space-y-5">
           <div>
-            <label
-              className="mb-1.5 block text-sm font-medium text-slate-900"
-              htmlFor="name"
-            >
+            <Label className="mb-1.5" htmlFor="name">
               Name
-            </label>
-            <input
-              className={fieldClassName}
+            </Label>
+            <Input
+              className="h-10"
               id="name"
               {...register("name")}
               type="text"
@@ -93,14 +91,11 @@ export function RegisterForm() {
           </div>
 
           <div>
-            <label
-              className="mb-1.5 block text-sm font-medium text-slate-900"
-              htmlFor="email"
-            >
+            <Label className="mb-1.5" htmlFor="email">
               Email
-            </label>
-            <input
-              className={fieldClassName}
+            </Label>
+            <Input
+              className="h-10"
               id="email"
               {...register("email")}
               type="email"
@@ -114,14 +109,11 @@ export function RegisterForm() {
           </div>
 
           <div>
-            <label
-              className="mb-1.5 block text-sm font-medium text-slate-900"
-              htmlFor="password"
-            >
+            <Label className="mb-1.5" htmlFor="password">
               Password
-            </label>
-            <input
-              className={fieldClassName}
+            </Label>
+            <Input
+              className="h-10"
               id="password"
               type="password"
               autoComplete="new-password"
@@ -141,13 +133,13 @@ export function RegisterForm() {
           </p>
         )}
 
-        <button
-          className="mt-4 h-10 w-full rounded-md bg-slate-950 text-sm font-medium text-white transition hover:bg-slate-800 focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-70"
+        <Button
+          className="mt-4 h-10 w-full"
           type="submit"
           disabled={registerMutation.isPending}
         >
           {registerMutation.isPending ? "Creating account..." : "Create account"}
-        </button>
+        </Button>
 
         <p className="mt-5 text-sm text-slate-600">
           Already registered?{" "}
