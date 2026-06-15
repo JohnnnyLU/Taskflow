@@ -12,11 +12,23 @@
     "backend:build": "npm --prefix backend run build",
     "check": "npm run frontend:check && npm run backend:check",
     "test": "npm run frontend:test && npm run backend:test",
+    "prepare": "husky",
+    "lint-staged": "lint-staged",
     "build": "npm run frontend:build && npm run backend:build",
     "ci": "npm run check && npm run test && npm run build"
+  },
+  "lint-staged": {
+    "frontend/**/*": "npm --prefix frontend run lint-staged:fix --",
+    "backend/**/*": "npm --prefix backend run lint-staged:fix --",
+    "*.{json,md,yml,yaml}": "prettier --write --ignore-unknown"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.7",
+    "prettier": "^3.8.4"
+  }
 }

@@ -16,11 +16,7 @@ export async function registerController(
   }
 }
 
-export async function loginController(
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) {
+export async function loginController(req: Request, res: Response, next: NextFunction) {
   try {
     const result = await authService.login(req.body);
 
@@ -30,11 +26,7 @@ export async function loginController(
   }
 }
 
-export async function meController(
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) {
+export async function meController(req: Request, res: Response, next: NextFunction) {
   try {
     const { userId } = req as AuthenticatedRequest;
 

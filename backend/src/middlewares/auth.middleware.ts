@@ -6,11 +6,7 @@ export interface AuthenticatedRequest extends Request {
   userId: string;
 }
 
-export function authMiddleware(
-  req: Request,
-  _res: Response,
-  next: NextFunction,
-) {
+export function authMiddleware(req: Request, _res: Response, next: NextFunction) {
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {

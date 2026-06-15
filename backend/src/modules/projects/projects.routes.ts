@@ -14,10 +14,6 @@ export const projectsRoutes = Router();
 projectsRoutes.use(authMiddleware);
 
 projectsRoutes.get("/", getProjectsController);
-projectsRoutes.post(
-  "/",
-  validate(createProjectSchema),
-  createProjectController,
-);
+projectsRoutes.post("/", validate(createProjectSchema), createProjectController);
 projectsRoutes.get("/:projectId", getProjectController);
 projectsRoutes.delete("/:projectId", deleteProjectController);

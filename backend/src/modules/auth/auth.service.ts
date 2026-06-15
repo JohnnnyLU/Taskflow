@@ -66,10 +66,7 @@ export async function login(input: LoginInput) {
     throw new AppError("Invalid email or password", 401);
   }
 
-  const isPasswordValid = await comparePassword(
-    input.password,
-    user.passwordHash,
-  );
+  const isPasswordValid = await comparePassword(input.password, user.passwordHash);
 
   if (!isPasswordValid) {
     throw new AppError("Invalid email or password", 401);
