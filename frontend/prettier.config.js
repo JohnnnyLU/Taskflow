@@ -1,4 +1,4 @@
-export default {
+const prettierConfig = {
   semi: true,
   singleQuote: false,
   trailingComma: "all",
@@ -11,3 +11,5 @@ export default {
   plugins: ["prettier-plugin-tailwindcss"],
   tailwindStylesheet: "./src/app/globals.css",
 };
+
+export default prettierConfig;
