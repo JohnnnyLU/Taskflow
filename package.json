@@ -1,0 +1,22 @@
+{
+  "name": "taskflow",
+  "version": "1.0.0",
+  "description": "Fullstack MVP for managing projects and tasks.",
+  "private": true,
+  "scripts": {
+    "frontend:check": "npm --prefix frontend run check",
+    "frontend:test": "npm --prefix frontend run test:run",
+    "frontend:build": "npm --prefix frontend run build",
+    "backend:check": "npm --prefix backend run check",
+    "backend:test": "npm --prefix backend run test:run",
+    "backend:build": "npm --prefix backend run build",
+    "check": "npm run frontend:check && npm run backend:check",
+    "test": "npm run frontend:test && npm run backend:test",
+    "build": "npm run frontend:build && npm run backend:build",
+    "ci": "npm run check && npm run test && npm run build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module"
+}
