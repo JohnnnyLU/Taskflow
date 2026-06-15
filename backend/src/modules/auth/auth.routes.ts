@@ -5,7 +5,7 @@ import { loginSchema, registerSchema } from "./auth.schemas.js";
 import {
   loginController,
   meController,
-  registerController
+  registerController,
 } from "./auth.controller.js";
 
 export const authRoutes = Router();

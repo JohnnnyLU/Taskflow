@@ -5,7 +5,7 @@ import * as authService from "./auth.service.js";
 export async function registerController(
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   try {
     const result = await authService.register(req.body);
@@ -19,7 +19,7 @@ export async function registerController(
 export async function loginController(
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   try {
     const result = await authService.login(req.body);
@@ -33,7 +33,7 @@ export async function loginController(
 export async function meController(
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   try {
     const { userId } = req as AuthenticatedRequest;

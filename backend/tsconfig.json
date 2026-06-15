@@ -20,16 +20,12 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
 
-
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
 
     "ignoreDeprecations": "6.0"
   },
-  "include": [
-    "src/**/*",
-    "prisma.config.ts"
-  ],
-  "exclude": ["node_modules", "dist"],
+  "include": ["src/**/*", "prisma.config.ts"],
+  "exclude": ["node_modules", "dist"]
 }

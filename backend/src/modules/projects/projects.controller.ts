@@ -6,7 +6,7 @@ import * as projectsService from "./projects.service.js";
 export async function getProjectsController(
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   try {
     const { userId } = req as AuthenticatedRequest;
@@ -22,7 +22,7 @@ export async function getProjectsController(
 export async function createProjectController(
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   try {
     const { userId } = req as AuthenticatedRequest;
@@ -38,7 +38,7 @@ export async function createProjectController(
 export async function getProjectController(
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   try {
     const { userId } = req as AuthenticatedRequest;
@@ -59,7 +59,7 @@ export async function getProjectController(
 export async function deleteProjectController(
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   try {
     const { userId } = req as AuthenticatedRequest;

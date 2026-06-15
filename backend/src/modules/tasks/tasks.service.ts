@@ -52,7 +52,7 @@ export async function getTasks(userId: string, projectId: string) {
 export async function createTask(
   userId: string,
   projectId: string,
-  input: CreateTaskInput
+  input: CreateTaskInput,
 ) {
   await ensureProjectOwner(userId, projectId);
 
@@ -70,7 +70,7 @@ export async function createTask(
 export async function updateTaskStatus(
   userId: string,
   taskId: string,
-  input: UpdateTaskStatusInput
+  input: UpdateTaskStatusInput,
 ) {
   const task = await getUserTask(userId, taskId);
 

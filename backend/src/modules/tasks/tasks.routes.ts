@@ -20,11 +20,11 @@ tasksRoutes.get("/projects/:projectId/tasks", getTasksController);
 tasksRoutes.post(
   "/projects/:projectId/tasks",
   validate(createTaskSchema),
-  createTaskController
+  createTaskController,
 );
 tasksRoutes.patch(
   "/tasks/:taskId/status",
   validate(updateTaskStatusSchema),
-  updateTaskStatusController
+  updateTaskStatusController,
 );
 tasksRoutes.delete("/tasks/:taskId", deleteTaskController);

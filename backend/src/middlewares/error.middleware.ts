@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from "express";
 
 export class AppError extends Error {
   statusCode: number;
@@ -13,7 +13,7 @@ export function errorMiddleware(
   error: Error,
   _request: Request,
   response: Response,
-  _next: NextFunction
+  _next: NextFunction,
 ) {
   if (error instanceof AppError) {
     return response.status(error.statusCode).json({

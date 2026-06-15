@@ -14,15 +14,15 @@ function sanitizeUser(user: {
     id: user.id,
     name: user.name,
     email: user.email,
-    createdAt: user.createdAt
+    createdAt: user.createdAt,
   };
 }
 
 export async function register(input: RegisterInput) {
   const existingUser = await prisma.user.findUnique({
     where: {
-      email: input.email
-    }
+      email: input.email,
+    },
   });
 
   if (existingUser) {
@@ -35,31 +35,31 @@ export async function register(input: RegisterInput) {
     data: {
       name: input.name,
       email: input.email,
-      passwordHash
+      passwordHash,
     },
     select: {
       id: true,
       name: true,
       email: true,
-      createdAt: true
-    }
+      createdAt: true,
+    },
   });
 
   const accessToken = signToken({
-    userId: user.id
+    userId: user.id,
   });
 
   return {
     user: sanitizeUser(user),
-    accessToken
+    accessToken,
   };
 }
 
 export async function login(input: LoginInput) {
   const user = await prisma.user.findUnique({
     where: {
-      email: input.email
-    }
+      email: input.email,
+    },
   });
 
   if (!user) {
@@ -68,7 +68,7 @@ export async function login(input: LoginInput) {
 
   const isPasswordValid = await comparePassword(
     input.password,
-    user.passwordHash
+    user.passwordHash,
   );
 
   if (!isPasswordValid) {
@@ -76,26 +76,26 @@ export async function login(input: LoginInput) {
   }
 
   const accessToken = signToken({
-    userId: user.id
+    userId: user.id,
   });
 
   return {
     user: sanitizeUser(user),
-    accessToken
+    accessToken,
   };
 }
 
 export async function getMe(userId: string) {
   const user = await prisma.user.findUnique({
     where: {
-      id: userId
+      id: userId,
     },
     select: {
       id: true,
       name: true,
       email: true,
-      createdAt: true
-    }
+      createdAt: true,
+    },
   });
 
   if (!user) {

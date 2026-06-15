@@ -6,7 +6,7 @@ import * as tasksService from "./tasks.service.js";
 export async function getTasksController(
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   try {
     const { userId } = req as AuthenticatedRequest;
@@ -27,7 +27,7 @@ export async function getTasksController(
 export async function createTaskController(
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   try {
     const { userId } = req as AuthenticatedRequest;
@@ -48,7 +48,7 @@ export async function createTaskController(
 export async function updateTaskStatusController(
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   try {
     const { userId } = req as AuthenticatedRequest;
@@ -69,7 +69,7 @@ export async function updateTaskStatusController(
 export async function deleteTaskController(
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   try {
     const { userId } = req as AuthenticatedRequest;

@@ -13,5 +13,5 @@ export function validate(schema: ZodSchema) {
 
     request.body = result.data;
     next();
-  }
+  };
 }
