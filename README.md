@@ -68,7 +68,7 @@ npm run prisma:migrate
 
 ## Docker
 
-Start PostgreSQL and backend:
+Start PostgreSQL, backend and frontend:
 
 ```bash
 docker compose up --build -d
@@ -84,6 +84,12 @@ Check backend health:
 
 ```bash
 curl http://localhost:4000/health
+```
+
+Open the frontend:
+
+```text
+http://localhost:3000
 ```
 
 Stop services:
