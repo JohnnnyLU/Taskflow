@@ -68,6 +68,8 @@ npm run prisma:migrate
 
 ## Docker
 
+Detailed Docker usage is documented in [docs/docker.md](docs/docker.md).
+
 Start PostgreSQL, backend and frontend:
 
 ```bash
