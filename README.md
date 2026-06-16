@@ -5,7 +5,7 @@ Fullstack MVP for managing projects and tasks.
 ## Stack
 
 - Frontend: Next.js, React, TypeScript, TailwindCSS, Zustand, TanStack Query, axios, react-hook-form, zod.
-- Backend: Node.js, Express, TypeScript, Prisma, SQLite, JWT, bcrypt, zod.
+- Backend: Node.js, Express, TypeScript, Prisma, PostgreSQL, JWT, bcrypt, zod.
 
 ## MVP Features
 
@@ -41,7 +41,7 @@ The backend `.env` should contain:
 
 ```env
 PORT=4000
-DATABASE_URL="file:./dev.db"
+DATABASE_URL="postgresql://taskflow:taskflow@localhost:5433/taskflow?schema=public"
 JWT_SECRET="your_jwt_secret"
 ```
 
@@ -52,6 +52,12 @@ NEXT_PUBLIC_API_URL=http://localhost:4000
 ```
 
 ## Database
+
+Start PostgreSQL:
+
+```bash
+docker compose up -d postgres
+```
 
 Run Prisma migrations from the backend directory:
 
