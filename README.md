@@ -66,6 +66,32 @@ cd backend
 npm run prisma:migrate
 ```
 
+## Docker
+
+Start PostgreSQL and backend:
+
+```bash
+docker compose up --build -d
+```
+
+Apply Prisma migrations inside the backend container:
+
+```bash
+docker compose exec backend npm run prisma:deploy
+```
+
+Check backend health:
+
+```bash
+curl http://localhost:4000/health
+```
+
+Stop services:
+
+```bash
+docker compose down
+```
+
 ## Development
 
 Start backend:
