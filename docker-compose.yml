@@ -17,5 +17,20 @@ services:
       timeout: 5s
       retries: 10
 
+  backend:
+    build:
+      context: ./backend
+    container_name: taskflow-backend
+    restart: unless-stopped
+    environment:
+      PORT: 4000
+      DATABASE_URL: postgresql://taskflow:taskflow@postgres:5432/taskflow?schema=public
+      JWT_SECRET: dev_secret
+    ports:
+      - "4000:4000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
 volumes:
   taskflow_postgres_data:
