@@ -1,5 +1,10 @@
 import { RegisterForm } from "@/features/auth/RegisterForm";
+import { PublicOnlyRoute } from "@/features/auth/PublicOnlyRoute";
 
 export default function RegisterPage() {
-  return <RegisterForm />;
+  return (
+    <PublicOnlyRoute>
+      <RegisterForm />
+    </PublicOnlyRoute>
+  );
 }
