@@ -69,6 +69,7 @@ npm run prisma:migrate
 ## Docker
 
 Detailed Docker usage is documented in [docs/docker.md](docs/docker.md).
+Production deployment is documented in [docs/deployment.md](docs/deployment.md).
 
 Start PostgreSQL, backend and frontend:
 
