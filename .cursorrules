@@ -1,0 +1,67 @@
+---
+description: Core AI coding rules for the Taskflow monorepo
+alwaysApply: true
+---
+
+# Taskflow Cursor Rules
+
+`AGENTS.md` is the primary source of truth for this repository. If any instruction here conflicts with `AGENTS.md`, follow `AGENTS.md`.
+
+## Stack And Architecture
+
+This is a pragmatic monorepo with two strictly isolated applications:
+
+- `backend/`: Node.js, Express, Prisma, PostgreSQL. Provides the REST API only.
+- `frontend/`: Next.js App Router, React Query, Zustand, Tailwind CSS, shadcn/ui. Consumes the backend API only.
+
+Frontend and backend must remain isolated:
+
+- Frontend communicates with the backend only through `frontend/src/shared/api/axios-instance.ts`.
+- Frontend must never access the database directly.
+- Backend must not depend on UI code.
+- Docker build contexts are limited to `backend/` and `frontend/`. Do not reference the monorepo root during image builds.
+
+## TypeScript And Code Quality
+
+- Do not use `any`.
+- Do not use `@ts-ignore`.
+- Define explicit interfaces and types.
+- Do not add dependencies unless the developer explicitly approves.
+- Prefer simple, modular code over enterprise-style abstractions.
+- Follow DRY and KISS. Extract shared utilities when logic repeats.
+- Keep changes scoped to the requested area.
+- Do not invent patterns that are not already present in the codebase.
+
+## Backend Rules
+
+- Keep domain isolation inside `backend/src/modules/*`.
+- Modules must not manipulate internals of other modules.
+- All database access must go through Prisma via `backend/src/lib/prisma.ts`.
+- Validate request data in middleware before controller logic.
+- Keep controllers thin and put business logic in the appropriate module/service layer.
+
+## Frontend Rules
+
+- Follow the existing FSD-style structure: `features`, `entities`, `widgets`, `shared`.
+- Use React Query exclusively for server state, requests, and caching.
+- Use Zustand only for global client/UI state such as filters and toggles.
+- Do not mix React Query and Zustand responsibilities.
+- Style only with Tailwind CSS.
+- Use UI primitives from `frontend/src/components/ui/`.
+
+## Testing And Database
+
+- When changing `backend/prisma/schema.prisma`, consider existing PostgreSQL data and migrations.
+- Tests must verify real behavior, not only mocked implementation details.
+- Use Vitest for unit tests.
+- Use Playwright for E2E tests.
+- In E2E tests, prefer `data-testid` or accessible ARIA roles.
+- Do not rely on brittle CSS selectors or visible text for test selectors.
+- Cover critical paths: authentication, project creation, task management.
+
+## Assistant Behavior
+
+- Read `AGENTS.md` before making architectural or coding decisions.
+- Follow existing local patterns before introducing new abstractions.
+- Ask for clarification when the requested behavior is ambiguous.
+- Do not fabricate APIs, files, dependencies, or conventions.
