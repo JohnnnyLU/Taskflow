@@ -1,0 +1,64 @@
+# ==============================================================================
+# CURSOR IGNORE CONFIGURATION
+# Prevents the AI from indexing heavy, auto-generated, or sensitive files.
+# ==============================================================================
+
+# 1. Dependencies & Environments
+node_modules/
+.env
+.env.*.local
+.env.local
+
+# 2. Build Outputs & Caches
+dist/
+dist-ssr/
+out/
+.next/
+.turbo/
+.cache/
+*.tsbuildinfo
+
+# 3. Logs & Diagnostics
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# 4. Testing & Reports (Playwright / Coverage)
+coverage/
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+playwright/.auth/
+
+# 5. Databases & Local Configurations
+.prisma/
+
+# 6. Editor & System Files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+Thumbs.db
+
+# 7. AI & Agent Directories
+.codex/
+.agents/
+.ai/
+.playwright-mcp/
+
+# 8. Large Media Assets (Optional but recommended for AI context)
+# *.png
+# *.jpg
+# *.jpeg
+# *.gif
+# *.mp4
+# *.pdf
+# *.zip
