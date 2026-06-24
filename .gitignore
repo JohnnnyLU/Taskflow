@@ -26,12 +26,6 @@ out
 !.env.example
 !.env.*.example
 
-# Databases
-*.db
-*.db-journal
-*.sqlite
-*.sqlite3
-
 # Prisma
 .prisma
 
